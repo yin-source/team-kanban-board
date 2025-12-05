@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>团队任务看板 - Team Kanban Board</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部区域 -->
+        <header class="header">
+            <h1><i class="fas fa-tasks"></i> 团队任务看板</h1>
+            <p class="subtitle">协作开发项目管理工具</p >
+            <div class="team-info">
+                <span class="team-name">开发团队A组</span>
+                <span class="task-count">总任务: <span id="total-tasks">0</span></span>
+            </div>
+        </header>
+
+        <!-- 添加任务区域 -->
+        <section class="add-task-section">
+            <h2><i class="fas fa-plus-circle"></i> 添加新任务</h2>
+            <form id="task-form">
+                <div class="form-group">
+                    <input type="text" id="task-title" placeholder="任务标题" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="task-desc" placeholder="任务描述"></textarea>
+                </div>
+                <div class="form-group">
+                    <select id="task-priority">
+                        <option value="low">低优先级</option>
+                        <option value="medium" selected>中优先级</option>
+                        <option value="high">高优先级</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-add">
+                    <i class="fas fa-plus"></i> 添加任务
+                </button>
+            </form>
+        </section>
+
+        <!-- 看板主体 -->
+        <main class="kanban-board">
+            <!-- 待办列 -->
+            <div class="column" id="todo-column">
+                <div class="column-header">
+                    <h3><i class="fas fa-clock"></i> 待办</h3>
+                    <span class="task-count">0</span>
+                </div>
+                <div class="tasks-container" id="todo-tasks">
+                    <!-- 任务卡片将通过JS动态添加 -->
+                </div>
+            </div>
+
+            <!-- 进行中列 -->
+            <div class="column" id="doing-column">
+                <div class="column-header">
+                    <h3><i class="fas fa-spinner"></i> 进行中</h3>
+                    <span class="task-count">0</span>
+                </div>
+                <div class="tasks-container" id="doing-tasks">
+                    <!-- 任务卡片将通过JS动态添加 -->
+                </div>
+            </div>
+
+            <!-- 已完成列 -->
+            <div class="column" id="done-column">
+                <div class="column-header">
+                    <h3><i class="fas fa-check-circle"></i> 已完成</h3>
+                    <span class="task-count">0</span>
+                </div>
+                <div class="tasks-container" id="done-tasks">
+                    <!-- 任务卡片将通过JS动态添加 -->
+                </div>
+            </div>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>使用 localStorage 存储数据 | 纯 HTML/CSS/JS 实现</p >
+            <p class="hint">提示：拖拽任务卡片到不同状态列以更新任务状态</p >
+        </footer>
+    </div>
+
+    <!-- 任务卡片模板（用于JS动态生成） -->
+    <template id="task-card-template">
+        <div class="task-card" draggable="true">
+            <div class="task-header">
+                <h4 class="task-title">任务标题</h4>
+                <button class="btn-delete"><i class="fas fa-times"></i></button>
+            </div>
+            <p class="task-desc">任务描述内容</p >
+            <div class="task-footer">
+                <span class="task-priority low">低优先级</span>
+                <span class="task-date">刚刚</span>
+            </div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
